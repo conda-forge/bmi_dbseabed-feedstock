@@ -11,17 +11,17 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - bmi_dbseabed=bmi_dbseabed.cli:main
 
 requirements:
   host:
-    - python >=3.10
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.10
+    - python >={{ python_min }}
     - numpy
     - rioxarray
     - requests
@@ -32,6 +32,8 @@ requirements:
     - owslib
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - bmi_dbseabed
   commands:
